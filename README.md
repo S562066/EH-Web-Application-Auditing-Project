@@ -2,9 +2,9 @@
 Final project for Ethical Hacking 44481
 
 Participants:
-Jackson Atwell
-Abdul Moiz
-Carson Stockdale
+Jackson Atwell  
+Abdul Moiz  
+Carson Stockdale  
 
 Introduction:
 OWASP Juice Shop is an application that contains many intentional vulnerabilities.

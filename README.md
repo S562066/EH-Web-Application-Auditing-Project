@@ -16,3 +16,10 @@ To check version: sudo docker --version
 Download and run: sudo docker run -d -p 3000:3000 bkimminich/juice-shop    
      
 To access juice shop, go to your browser and type: http://localhost:3000   
+
+
+# XSS 
+
+# Login via SQL Injection
+
+# Get Baskets

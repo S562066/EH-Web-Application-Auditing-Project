@@ -2,7 +2,7 @@
 Final project for Ethical Hacking 44481
 
 Participants:  
-Jackson Atwell  
+Ash Atwell  
 Abdul Moiz  
 Carson Stockdale  
 

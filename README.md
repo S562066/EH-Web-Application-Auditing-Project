@@ -81,12 +81,11 @@ In this version, placeholders are used and the input is passed separately. This 
 ### Screenshots
 
 
-
-![success](./success.png)
-![payload](./payload.png)
-![login failed](./login_failed.png)
-![login](./login.png)
 ![running](./running.png)
+![login](./login.png)
+![login failed](./login_failed.png)
+![payload](./payload.png)
+![success](./success.png)
 
 # Get Baskets
 

@@ -1,0 +1,1 @@
+These injections exist because of improper sanitation on the input field of the website. While there is sanitation implemented in place in other parts of the website, for example the account profile username field, it was not implemented in the search bar, where the payload was injected.

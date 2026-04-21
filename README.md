@@ -1,19 +1,24 @@
-# EH-Web-Application-Auditing-Project
-Final project for Ethical Hacking 44481
+# EH-Web-Application-Auditing-Project Final project for Ethical Hacking 44481
 
 Participants:  
-Ash Atwell  
-Abdul Moiz  
-Carson Stockdale  
 
-Introduction:  
-OWASP Juice Shop is an application that contains many intentional vulnerabilities.   
+- Ash Atwell  
+- Abdul Moiz  
+- Carson Stockdale  
 
-Setup for Kali:  
-Update your system: sudo apt update && sudo apt upgrade -y  
-Install docker: sudo apt install docker.io -y   
-To check version: sudo docker --version   
-Download and run: sudo docker run -d -p 3000:3000 bkimminich/juice-shop    
+Introduction: OWASP Juice Shop is an application that contains many
+intentional vulnerabilities.   
+
+## Setup for Kali  
+
+- Update your system: 
+    `sudo apt update && sudo apt upgrade -y`
+- Install docker: 
+    `sudo apt install docker.io -y`
+- To check version: 
+    `sudo docker --version`
+- Download and run: 
+    `sudo docker run -d -p 3000:3000 bkimminich/juice-shop`
      
 To access juice shop, go to your browser and type: http://localhost:3000   
 
@@ -22,15 +27,17 @@ To access juice shop, go to your browser and type: http://localhost:3000
 
 # Login via SQL Injection
 
-### Description
+## Description
 
-In this part, I tested the login functionality of OWASP Juice Shop to check for SQL injection vulnerabilities. The goal was to determine whether the application properly validates and handles user input during authentication.
+In this part, I tested the login functionality of OWASP Juice Shop to check for
+SQL injection vulnerabilities. The goal was to determine whether the
+application properly validates and handles user input during authentication.
 
-### Payload Used
+## Payload Used
 
 `' OR 1=1 --`
 
-### Steps Performed
+## Steps Performed
 
 1. Opened the OWASP Juice Shop application in the browser  
 2. Navigated to the login page  
@@ -38,45 +45,61 @@ In this part, I tested the login functionality of OWASP Juice Shop to check for 
 4. Entered a random value in the password field  
 5. Submitted the login form  
 
-### Result
+## Result
 
-The application allowed login without valid credentials. This confirms that the authentication mechanism is vulnerable to SQL injection and can be bypassed.
+The application allowed login without valid credentials. This confirms that the
+authentication mechanism is vulnerable to SQL injection and can be bypassed.
 
-### Explanation
+## Explanation
 
-Normally, the application checks whether the email and password entered by the user match the records stored in the database. However, when the payload `' OR 1=1 --` is entered, it changes the logic of the SQL query.
+Normally, the application checks whether the email and password entered by the
+user match the records stored in the database. However, when the payload `' OR
+1=1 --` is entered, it changes the logic of the SQL query.
 
-Instead of checking for a specific user, the condition becomes true for all records because `1=1` is always true. The `--` symbol comments out the rest of the query, so the password check is ignored. As a result, the system grants access without verifying real credentials.
+Instead of checking for a specific user, the condition becomes true for all
+records because `1=1` is always true. The `--` symbol comments out the rest of
+the query, so the password check is ignored. As a result, the system grants
+access without verifying real credentials.
 
-### Impact
+## Impact
 
-This vulnerability allows an attacker to bypass authentication and gain unauthorized access to the application. It can lead to exposure of user data, account takeover, and further exploitation of the system. This is considered a high severity security issue.
+This vulnerability allows an attacker to bypass authentication and gain
+unauthorized access to the application. It can lead to exposure of user data,
+account takeover, and further exploitation of the system. This is considered a
+high severity security issue.
 
-### Remediation
+## Remediation
 
-The vulnerability occurs because user input is directly inserted into SQL queries without proper handling.
+The vulnerability occurs because user input is directly inserted into SQL
+queries without proper handling.
 
 To fix this issue:
 
-- Use parameterized queries (prepared statements) so that user input is treated strictly as data and not executable SQL  
-- Avoid building SQL queries using string concatenation, as this allows attackers to inject malicious input  
-- Validate and sanitize all user inputs on the server side to ensure they follow expected formats  
-- Implement proper error handling so sensitive database errors are not exposed to users  
-- Apply least-privilege database access to minimize potential damage if an attack occurs  
+- Use parameterized queries (prepared statements) so that user input is treated
+  strictly as data and not executable SQL  
+- Avoid building SQL queries using string concatenation, as this allows
+  attackers to inject malicious input  
+- Validate and sanitize all user inputs on the server side to ensure they
+  follow expected formats  
+- Implement proper error handling so sensitive database errors are not exposed
+  to users  
+- Apply least-privilege database access to minimize potential damage if an
+  attack occurs  
 
-### Example Fix
+## Example Fix
 
-Vulnerable approach:
-`SELECT * FROM users WHERE email = 'user_input' AND password = 'password'`
+Vulnerable approach: `SELECT * FROM users WHERE email = 'user_input' AND
+password = 'password'`
 
 
 This directly inserts user input into the SQL query.
 
-Secure approach:
-`SELECT * FROM users WHERE email = ? AND password = ?`
+Secure approach: `SELECT * FROM users WHERE email = ? AND password = ?`
 
 
-In this version, placeholders are used and the input is passed separately. This ensures that the database treats the input as plain data instead of SQL code, preventing injection attacks.
+In this version, placeholders are used and the input is passed separately. This
+ensures that the database treats the input as plain data instead of SQL code,
+preventing injection attacks.
 
 ### Screenshots
 
@@ -97,11 +120,10 @@ the requesting user.
 
 ## Execution
 
-```{.bash}
-# Get you token from cookies or from the get request in the networking tab
-export BASKET=4 AUTH="YOUR_AUTH_TOKEN" 
-curl "http://localhost:3000/rest/basket/$BASKET" -H "Authorization: $AUTH" | jq # just makes it pretty
-```
+```{.bash} # Get you token from cookies or from the get request in the
+networking tab export BASKET=4 AUTH="YOUR_AUTH_TOKEN" curl
+"http://localhost:3000/rest/basket/$BASKET" -H "Authorization: $AUTH" | jq #
+just makes it pretty ```
 
 ## Discovery 
 
@@ -136,6 +158,5 @@ information you should check on request if that user owns that basket.
 
 ## Screenshots
 
-![API Get Request](./APIGet.png)
-![Execution](./curl.png)
+![API Get Request](./APIGet.png) ![Execution](./curl.png)
 

@@ -91,6 +91,51 @@ In this version, placeholders are used and the input is passed separately. This 
 
 ## Description
 
-In this section we tested the access control of the user's basket data. The
+In this section we test the access control of the user's basket data. The
 intention was to see if there is any way to fetch data that does not belong to
 the requesting user.
+
+## Execution
+
+```{.bash}
+# Get you token from cookies or from the get request in the networking tab
+export BASKET=4 AUTH="YOUR_AUTH_TOKEN" 
+curl "http://localhost:3000/rest/basket/$BASKET" -H "Authorization: $AUTH" | jq # just makes it pretty
+```
+
+## Discovery 
+
+1. Create an account
+1. Login
+1. Go to the basket page 
+1. Inspect the page
+1. Go to the Network tab in the Inspector
+1. Reload the page 
+1. Find the `GET` request that represents your BasketID (6)
+1. Grab the Authorization Token
+1. Export the variables
+1. Run `curl`
+
+## Result
+
+When you run the curl command you are returned with a JSON representation of
+the basket.
+
+## Impact 
+
+This allows malicious actors to view, and potentially edit, what items are in
+another user's basket. This can cause financial implications as well as leaking
+user's sensitive data.
+
+## Remediation
+
+When the user requests from the API for the basket's contents, you should only
+get the basket assigned to the user's Authorization Token. The end user should
+never be exposed to what their BasketID is. If you need to know that
+information you should check on request if that user owns that basket.
+
+## Screenshots
+
+![API Get Request](./APIGet.png)
+![Execution](./curl.png)
+

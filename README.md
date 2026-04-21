@@ -22,32 +22,55 @@ To access juice shop, go to your browser and type: http://localhost:3000
 
 # Login via SQL Injection
 ### Description
-In this part, I tested the login functionality of OWASP Juice Shop to check for SQL injection vulnerabilities. The goal was to see if the application properly validates user input.
+In this part, I tested the login functionality of OWASP Juice Shop to check for SQL injection vulnerabilities. The goal was to determine whether the application properly validates and handles user input during authentication.
 
 ### Payload Used
 ' OR 1=1 --
 
 ### Steps Performed
-1. Opened the Juice Shop application in the browser
-2. Navigated to the login page
-3. Entered the SQL injection payload in the email field
-4. Entered a random password
-5. Clicked the login button
+1. Opened the OWASP Juice Shop application in the browser  
+2. Navigated to the login page  
+3. Entered the SQL injection payload in the email field  
+4. Entered a random value in the password field  
+5. Submitted the login form  
 
 ### Result
-The application allowed login without valid credentials. This means the authentication system can be bypassed using SQL injection.
+The application allowed login without valid credentials. This confirms that the authentication mechanism is vulnerable to SQL injection and can be bypassed.
 
 ### Explanation
-Normally, the system checks if the email and password match. However, the payload changed the query logic to always return true. Because of this, the system accepted the login without verifying real credentials.
+Normally, the application checks whether the email and password entered by the user match the records stored in the database. However, when the payload `' OR 1=1 --` is entered, it changes the logic of the SQL query.
+
+Instead of checking for a specific user, the condition becomes true for all records because `1=1` is always true. The `--` symbol comments out the rest of the query, so the password check is ignored. As a result, the system grants access without verifying real credentials.
 
 ### Impact
-An attacker can gain unauthorized access to the system. This is a serious security issue because it exposes user accounts and sensitive data.
+This vulnerability allows an attacker to bypass authentication and gain unauthorized access to the application. It can lead to exposure of user data, account takeover, and further exploitation of the system. This is considered a high severity security issue.
 
 ### Remediation
-- Use parameterized queries (prepared statements)
-- Avoid building SQL queries using string concatenation
-- Validate user input on the server side
-- Use proper error handling
+The vulnerability occurs because user input is directly inserted into SQL queries without proper handling.
+
+To fix this issue:
+
+- Use parameterized queries (prepared statements) so that user input is treated strictly as data and not executable SQL  
+- Avoid building SQL queries using string concatenation, as this allows attackers to inject malicious input  
+- Validate and sanitize all user inputs on the server side to ensure they follow expected formats  
+- Implement proper error handling so sensitive database errors are not exposed to users  
+- Apply least-privilege database access to minimize potential damage if an attack occurs  
+
+### Example Fix
+
+Vulnerable approach:
+SELECT * FROM users WHERE email = 'user_input' AND password = 'password'
+
+
+This directly inserts user input into the SQL query.
+
+Secure approach:
+SELECT * FROM users WHERE email = ? AND password = ?
+
+
+In this version, placeholders are used and the input is passed separately. This ensures that the database treats the input as plain data instead of SQL code, preventing injection attacks.
+
+### Screenshots
 <img width="1465" height="792" alt="success" src="https://github.com/user-attachments/assets/35da8c1c-2495-479f-ac28-5643e9aa70fa" />
 <img width="1465" height="792" alt="payload" src="https://github.com/user-attachments/assets/31b3e199-d535-4c0d-ab33-8623fdc5d808" />
 <img width="1465" height="792" alt="login failed" src="https://github.com/user-attachments/assets/54a975f7-25dc-4c67-813b-e47949e38734" />

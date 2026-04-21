@@ -80,12 +80,11 @@ In this version, placeholders are used and the input is passed separately. This 
 
 ### Screenshots
 
-![success](https://github.com/user-attachments/assets/35da8c1c-2495-479f-ac28-5643e9aa70fa)
-![payload](https://github.com/user-attachments/assets/31b3e199-d535-4c0d-ab33-8623fdc5d808)
-![login failed](https://github.com/user-attachments/assets/54a975f7-25dc-4c67-813b-e47949e38734)
-![login](https://github.com/user-attachments/assets/dc76a7e1-eb9b-4dbe-95c7-8b3d394d3d14)
-![running](https://github.com/user-attachments/assets/dc341b97-a0f9-4f41-b21d-2fa8a540f34b)
-
+![Login Page](login.png)
+![Failed Login](failed.png)
+![Payload](payload.png)
+![Application Running](running.png)
+![Success](success.png)
 # Get Baskets
 
 ## Description

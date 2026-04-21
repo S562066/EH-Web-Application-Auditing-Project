@@ -80,11 +80,14 @@ In this version, placeholders are used and the input is passed separately. This 
 
 ### Screenshots
 
-![Login Page](login.png)
-![Failed Login](failed.png)
-![Payload](payload.png)
-![Application Running](running.png)
-![Success](success.png)
+
+
+![success](./success.png)
+![payload](./payload.png)
+![login failed](./login_failed.png)
+![login](./login.png)
+![running](./running.png)
+
 # Get Baskets
 
 ## Description

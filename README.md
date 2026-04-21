@@ -28,7 +28,7 @@ In this part, I tested the login functionality of OWASP Juice Shop to check for 
 
 ### Payload Used
 
-' OR 1=1 --
+`' OR 1=1 --`
 
 ### Steps Performed
 
@@ -80,10 +80,16 @@ In this version, placeholders are used and the input is passed separately. This 
 
 ### Screenshots
 
-![success](https://github.com/user-attachments/assets/35da8c1c-2495-479f-ac28-5643e9aa70fa){width="1465" height="792"}
-![payload](https://github.com/user-attachments/assets/31b3e199-d535-4c0d-ab33-8623fdc5d808){width="1465" height="792"}
-![login failed](https://github.com/user-attachments/assets/54a975f7-25dc-4c67-813b-e47949e38734){width="1465" height="792"}
-![login](https://github.com/user-attachments/assets/dc76a7e1-eb9b-4dbe-95c7-8b3d394d3d14){width="1465" height="792"}
-![running](https://github.com/user-attachments/assets/dc341b97-a0f9-4f41-b21d-2fa8a540f34b){width="1465" height="792"}
+![success](https://github.com/user-attachments/assets/35da8c1c-2495-479f-ac28-5643e9aa70fa){style="width: 1465; height: 792;"}
+![payload](https://github.com/user-attachments/assets/31b3e199-d535-4c0d-ab33-8623fdc5d808){style="width: 1465; height: 792;"}
+![login failed](https://github.com/user-attachments/assets/54a975f7-25dc-4c67-813b-e47949e38734){style="width: 1465; height: 792;"}
+![login](https://github.com/user-attachments/assets/dc76a7e1-eb9b-4dbe-95c7-8b3d394d3d14){style="width: 1465; height: 792;"}
+![running](https://github.com/user-attachments/assets/dc341b97-a0f9-4f41-b21d-2fa8a540f34b){style="width: 1465; height: 792;"}
 
 # Get Baskets
+
+## Description
+
+In this section we tested the access control of the user's basket data. The
+intention was to see if there is any way to fetch data that does not belong to
+the requesting user.

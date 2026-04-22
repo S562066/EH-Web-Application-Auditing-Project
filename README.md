@@ -150,10 +150,11 @@ the requesting user.
 
 ## Execution
 
-```{.bash} # Get you token from cookies or from the get request in the
-networking tab export BASKET=4 AUTH="YOUR_AUTH_TOKEN" curl
-"http://localhost:3000/rest/basket/$BASKET" -H "Authorization: $AUTH" | jq #
-just makes it pretty ```
+```console
+# Get you token from cookies or from the get request in the networking tab 
+$ export BASKET=4 AUTH="YOUR_AUTH_TOKEN" 
+$ curl "http://localhost:3000/rest/basket/$BASKET" -H "Authorization: $AUTH" | jq # just makes it pretty
+```
 
 ## Discovery 
 

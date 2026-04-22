@@ -25,6 +25,36 @@ To access juice shop, go to your browser and type: http://localhost:3000
 
 # XSS 
 
+## Description
+These two challenges demonstrated that cross site scripting (XSS) was possible on the website. 
+
+## Payload Used
+DOM XSS: <iframe src="javascript:alert('xss')">
+
+Bonus Payload: <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+
+## Steps Performed
+1. Opened the Juice Shop application in the browser
+2. Navigated to the search bar
+3. Placed the JavaScript payload
+4. Press search
+
+## Result
+There was clear indication that XSS was performed, as the DOM XSS stack produced an alert to the user, and the bonus payload displayed the SoundCloud viewer built in the webpage.
+
+## Explanation
+The search bar input field did not properly sanitize the sensitive input text in the payload. This causes the browser to interpret the text as code, not as data.
+
+## Impact
+Attackers can inject malicious script into trusted websites. When other users visit the compromised page, their browser executes that malicious code. 
+
+## Remediation
+These injections exist because of improper sanitation on the input field of the website. While there is sanitation implemented in place in other parts of the website, for example the account profile username field, it was not implemented in the search bar, where the payload was injected.
+
+## Screenshots
+![dom](./dom_xss_screenshot.png)
+![bonus](./bonus_payload_screenshot.png)
+
 # Login via SQL Injection
 
 ## Description
